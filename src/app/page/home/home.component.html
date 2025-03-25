@@ -1,0 +1,30 @@
+<app-tool-bar (searchChanged)="onSearchChanged($event)" />
+
+<ng-container *ngIf="isLoading(); else loaded">
+  <div class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</ng-container>
+
+<ng-template #loaded>
+  <ng-container *ngIf="listUtils.filteredData().length > 0; else noResults">
+    <div class="cards-container">
+      <app-country-card
+        *ngFor="let country of listUtils.paginatedData()"
+        [country]="country"
+        (viewMore)="goToDetails(country)"
+      />
+    </div>
+
+    <mat-paginator
+      [length]="listUtils.filteredData().length"
+      [pageSize]="listUtils.pageSize()"
+      [pageSizeOptions]="[10, 20, 30]"
+      (page)="onPageChange($event)"
+    />
+  </ng-container>
+
+  <ng-template #noResults>
+    <p class="no-results">No matching countries found.</p>
+  </ng-template>
+</ng-template>

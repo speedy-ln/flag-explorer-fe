@@ -1,0 +1,7 @@
+<mat-card class="country-card" appearance="outlined" (click)="viewMore.emit()">
+  <img mat-card-image [src]="country.flags.png" [alt]="country.name.common + ' flag'" />
+  <mat-card-content>
+    <mat-card-title>{{ country.name.common }}</mat-card-title>
+    <mat-card-subtitle>{{ country.capital?.[0] || 'No Capital' }}</mat-card-subtitle>
+  </mat-card-content>
+</mat-card>

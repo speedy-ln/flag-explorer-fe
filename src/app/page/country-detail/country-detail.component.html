@@ -1,0 +1,11 @@
+<div *ngIf="country(); else loading" class="detail-container">
+  <h2>{{ country()?.name?.common }}</h2>
+  <p><strong>Capital:</strong> {{ country()?.capital?.[0] || 'N/A' }}</p>
+  <p><strong>Population:</strong> {{ country()?.population | number }}</p>
+  <img [src]="country()?.flags?.png" [alt]="country()?.name?.common + ' flag'" />
+  <br/>
+  <button (click)="goBack()" class="back-button">← Back</button>
+</div>
+<ng-template #loading>
+  <p class="loading">Loading country details...</p>
+</ng-template>

@@ -1,0 +1,28 @@
+.country-card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.country-card:hover, .country-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+mat-card-header {
+  min-height: 100px;
+}
+
+img[mat-card-image] {
+  height: 180px;
+  object-fit: cover;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
