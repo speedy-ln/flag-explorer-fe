@@ -1,0 +1,40 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: npm install -g @angular/cli
+  displayName: 'Install Angular CLI'
+
+- script: npm ci
+  displayName: 'Install project dependencies'
+
+- script: npm run test --watch=false --browsers=ChromeHeadless --code-coverage
+  displayName: 'Run unit tests'
+  continueOnError: false
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/TESTS-*.xml'
+    testResultsFormat: 'JUnit'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+
+- script: npm run build --configuration production
+  displayName: 'Build Angular App'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'dist'
+    artifactName: 'angular-app'
+    publishLocation: 'Container'
