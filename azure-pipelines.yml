@@ -19,7 +19,7 @@ steps:
 - script: npm ci
   displayName: 'Install project dependencies'
 
-- script: npm run test --watch=false --browsers=ChromeHeadless --code-coverage
+- script: npm run test --watch=false --browsers=ChromeHeadless --code-coverage --no-sandbox
   displayName: 'Run unit tests'
   continueOnError: false
 
